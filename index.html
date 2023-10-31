@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <title>SCG test page</title>
+    <title>SCG test page    </title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     
     <script>
@@ -32,7 +32,12 @@
 
             var valNum2 = getRandomFloat(-1.5, 1.5, 2)
             $("#ranNaum2").text(round(ranNum + valNum2, 2));
+            
+            $('#ranNaum1_2').val('');
+            $('#ranNaum2_2').val('');
 
+            $('#input1').val('');
+            $('#input1').focus();
         }
 
         $(function(){       // jquery 시작
@@ -62,8 +67,7 @@
             //#buttionP 클릭이벤트
             $("#buttonP").click(function(){
                 init_rand();
-                $('#input1').val('');
-                $('#input1').focus();
+                
 
             });
             
