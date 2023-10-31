@@ -47,6 +47,12 @@
             */
             init_rand();
 
+            $("#input1").on("keyup",function(key){
+                if(key.keyCode==13) {
+                    $("#input2").click();
+                }
+            }); 
+
             $("#input2").click(function(){
                 console.log('Start');
                 
