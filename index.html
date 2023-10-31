@@ -5,48 +5,92 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     
     <script>
+        function getRandomFloat(min, max, decimals) {
+            const str = (Math.random() * (max - min) + min).toFixed(
+                decimals,
+            );
+
+            return parseFloat(str);
+        }
+
+        function round(value, precision) {
+            if (Number.isInteger(precision)) {
+                var shift = Math.pow(10, precision);
+                // Limited preventing decimal issue
+                return (Math.round( value * shift + 0.00000000000001 ) / shift);
+            } else {
+                return Math.round(value);
+            }
+        } 
+
+        function init_rand(){
+            var ranNum = getRandomFloat(-4.0, 4.0, 2)
+            $("#ranNaum").text(ranNum);
+            
+            var valNum1 = getRandomFloat(-1.5, 1.5, 2)
+            $("#ranNaum1").text(round(ranNum + valNum1, 2));
+
+            var valNum2 = getRandomFloat(-1.5, 1.5, 2)
+            $("#ranNaum2").text(round(ranNum + valNum2, 2));
+
+        }
+
         $(function(){       // jquery 시작
             /*
                 난수(랜덤한 숫자) 만들기 Math.random() 
             */
-            
+            init_rand();
+
+            $("#input2").click(function(){
+                console.log('Start');
+                
+                var input1 = $("#input1").val();
+                var ranNaum1 = $("#ranNaum1").text();
+                var ranNaum2 = $("#ranNaum2").text();
+
+                i1 = parseFloat(input1) + parseFloat(ranNaum1);
+                i2 = parseFloat(input1) + parseFloat(ranNaum2);
+
+                i1 = round(i1, 2);
+                i2 = round(i2, 2);
+
+
+                $('#ranNaum1_2').text(i1);
+                $('#ranNaum2_2').text(i2);
+            });
+
             //#buttionP 클릭이벤트
             $("#buttonP").click(function(){
-                
-                //Math.random 
-                var ranNum = Math.random();
-                $("#ranNaum").text(ranNum);
-                
-                //Math.random * 10
-                var test01 = ranNum*10;
-                $("#test01").text(test01);
-                
-                //Math.floor(Math.random * 10) 
-                var test02 = Math.floor(ranNum*10);
-                $("#test02").text(test02);
-                
-                //1~10 난수 만들기
-                var test03 = Math.floor(ranNum*10+1);
-                $("#test03").text(test03);
-                
+                init_rand();
+                $('#input1').val('');
+                $('#input1').focus();
+
             });
+            
         });
     </script>
     
     <style>
-        #buttonP{
-            font-size: 30px;
+        body{
+            font-size: 20px;
             font-weight: bold;
             cursor: pointer;
         } 
+        #ranNaum1_2{
+            color: yellow;
+        }
+        #ranNaum2_2{
+            color: yellow;
+        }
     </style>
     
 </head>
     <body>
-        <p id="buttonP">클릭하면 위 예제의 결과를 확인 합니다.</p>
-        <p>생성된 난수(랜덤한 숫자) = <span id="ranNaum"></span></p>
-        <p>난수 * 10 = <span id="test01"></span></p>
-        <p>floor(난수 * 10) = <span id="test02"></span></p>
-        <p>1~10 사이의 난수 생성 = <span id="test03"></span></p>
+        <p><input type=number name='input1' id="input1" /><input type=button id="input2" value="확인하기" /></p>
+        <p style="display:none;">랜덤 숫자 = <span id="ranNaum"></span></p>
+        <p>* <span id="ranNaum1"></span> = <span id="ranNaum1_2"></span></p>
+        <p>* <span id="ranNaum2"></span> = <span id="ranNaum2_2"></span></p>
+        <p><span id="test03"></span></p>
+        <p id="buttonP">리셋</p>
     </body>
 </html>
